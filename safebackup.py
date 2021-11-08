@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
     import sys
     MAX_NO_OF_BACKUPS = 10
-    BACKUP_FROM = sys.exec_prefix + r'\TRGT\adwords_python2_examples_15.0.1\v201809\shiv'
+    BACKUP_FROM = sys.exec_prefix + r'\shiv'
     BACKUP_DRIVE_PREFIX = 'safebackup'
-    BACKUP_TO_PARENT_REPO = r'E:\trgt_backups'
+    BACKUP_TO_PARENT_REPO = r'E:\backups'
     BACKUP_TO = BACKUP_TO_PARENT_REPO + '/' + BACKUP_DRIVE_PREFIX + '1'
 
     take_local_backup()
