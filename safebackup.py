@@ -40,7 +40,7 @@ def take_local_backup():
         sleep(2)
 
     trial = 1
-    latest_backup_repo = max(creation_date_dict, key=creation_date_dict.get, default=[])
+    latest_backup_repo = max(creation_date_dict, key=creation_date_dict.get, default='')
 
     import filecmp
 
