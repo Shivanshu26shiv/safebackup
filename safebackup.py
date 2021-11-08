@@ -25,9 +25,9 @@ def take_local_backup():
     from datetime import datetime
 
     creation_date_dict = {}
-    for repo in os.listdir(BACKUP_TO_PARENT_REPO):
-        path = BACKUP_TO_PARENT_REPO + r"\/"+repo
-        if os.path.isdir(path) and fnmatch.fnmatch(repo, BACKUP_DRIVE_PREFIX+'*'):
+    for repo in os.listdir(BACKUP_REPO_PARENT):
+        path = BACKUP_REPO_PARENT + r"\/"+repo
+        if os.path.isdir(path) and fnmatch.fnmatch(repo, BACKUP_REPO_PREFIX+'*'):
             creation_date_dict[path] = datetime.fromtimestamp(os.stat(path).st_ctime)
 
     print('\ncreation_date_dict: {}'.format(creation_date_dict))
@@ -76,8 +76,8 @@ if __name__ == '__main__':
     import sys
     MAX_NO_OF_BACKUPS = 10
     BACKUP_FROM = sys.exec_prefix + r'\shiv'
-    BACKUP_DRIVE_PREFIX = 'safebackup'
-    BACKUP_TO_PARENT_REPO = r'E:\backups'
-    BACKUP_TO = BACKUP_TO_PARENT_REPO + '/' + BACKUP_DRIVE_PREFIX + '1'
+    BACKUP_REPO_PREFIX = 'safebackup'
+    BACKUP_REPO_PARENT = r'E:\my_backups'
+    BACKUP_TO = BACKUP_REPO_PARENT + '/' + BACKUP_REPO_PREFIX + '1'
 
     take_local_backup()
