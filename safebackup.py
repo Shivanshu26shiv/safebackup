@@ -26,7 +26,7 @@ def take_local_backup():
 
     creation_date_dict = {}
     for repo in os.listdir(BACKUP_REPO_PARENT):
-        path = BACKUP_REPO_PARENT + r"\/"+repo
+        path = BACKUP_REPO_PARENT + r"\/" + repo
         if os.path.isdir(path) and fnmatch.fnmatch(repo, BACKUP_REPO_PREFIX+'*'):
             creation_date_dict[path] = datetime.fromtimestamp(os.stat(path).st_ctime)
 
@@ -36,7 +36,9 @@ def take_local_backup():
         oldest_backup_repo = min(creation_date_dict, key=creation_date_dict.get)
         print('\nDeleting: {}'.format(oldest_backup_repo), '\n')
         os.system('rmdir /S /Q "{}"'.format(oldest_backup_repo))
+        
         from time import sleep
+        
         sleep(2)
 
     trial = 1
@@ -69,11 +71,13 @@ def take_local_backup():
 if __name__ == '__main__':
 
     import os
+    
     if os.name != 'nt':
         print('This is a Windows based script!')
         exit()
 
     import sys
+    
     MAX_NO_OF_BACKUPS = 10
     BACKUP_FROM = sys.exec_prefix + r'\TRGT\adwords_python2_examples_15.0.1\v201809\shiv'
     BACKUP_REPO_PREFIX = 'safebackup'
