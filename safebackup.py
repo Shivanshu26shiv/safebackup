@@ -1,7 +1,7 @@
 """
 - This script takes cyclic backups based on MAX_NO_OF_BACKUPS
 - Checks latest backup repo before taking backup, if identical, it skips
-- Ideally scheduled via task scheduler at every logon
+- Typically scheduled via task scheduler at every logon
 - To see the latest backup, refresh windows explorer
 - Ideally, only need to change variables in CAPS
 """
@@ -30,9 +30,9 @@ def take_local_backup():
         if os.path.isdir(path) and fnmatch.fnmatch(repo, BACKUP_REPO_PREFIX+'*'):
             creation_date_dict[path] = datetime.fromtimestamp(os.stat(path).st_ctime)
 
-    print('\ncreation_date_dict: {}'.format(creation_date_dict))
+    print('\ncreation_date_dict: {} {}'.format(len(creation_date_dict), creation_date_dict))
 
-    if len(creation_date_dict) == MAX_NO_OF_BACKUPS:
+    if len(creation_date_dict) >= MAX_NO_OF_BACKUPS:
         oldest_backup_repo = min(creation_date_dict, key=creation_date_dict.get)
         print('\nDeleting: {}'.format(oldest_backup_repo), '\n')
         os.system('rmdir /S /Q "{}"'.format(oldest_backup_repo))
@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
     import sys
     MAX_NO_OF_BACKUPS = 10
-    BACKUP_FROM = sys.exec_prefix + r'\shiv'
+    BACKUP_FROM = sys.exec_prefix + r'\TRGT\adwords_python2_examples_15.0.1\v201809\shiv'
     BACKUP_REPO_PREFIX = 'safebackup'
-    BACKUP_REPO_PARENT = r'E:\my_backups'
+    BACKUP_REPO_PARENT = r'E:\trgt_backups'
     BACKUP_TO = BACKUP_REPO_PARENT + '/' + BACKUP_REPO_PREFIX + '1'
 
     take_local_backup()
